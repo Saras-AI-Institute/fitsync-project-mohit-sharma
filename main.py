@@ -1,52 +1,58 @@
 import streamlit as st
-from modules.processor import process_data
+from PIL import Image
 
-# Configure the page layout and title
-st.set_page_config(layout="wide", page_title="FitSync")
-
-# Set the title of the dashboard
-st.title("FitSync - Personal Health Analytics")
-
-# Sidebar for time range selection
-st.sidebar.header("Filters")
-time_range = st.sidebar.selectbox(
-    "Select Time Range",
-    options=["Last 7 Days", "Last 30 Days", "All Time"],
-    index=2  # Default to 'All Time'
+# Set a more attractive page configuration
+st.set_page_config(
+    layout="wide",
+    page_title="FitSync",
+    page_icon="💪"
 )
-# Load and process the data
-df = process_data()
 
-# Filter the DataFrame based on selected time range
-if time_range == "Last 7 Days":
-    df = df.sort_values(by='Date', ascending=False).head(7)
-elif time_range == "Last 30 Days":
-    df = df.sort_values(by='Date', ascending=False).head(30)
-# 'All Time' uses the full DataFrame without filtering
+# Use custom CSS and HTML for styling
+st.markdown(
+    """
+    <style>
+    .main-container {
+        background-color: #f0f2f6;
+        padding: 30px;
+    }
+    .title {
+        color: #FF4B4B;
+        font-family: 'Arial Black', Gadget, sans-serif;
+        text-align: center;
+    }
+    .subtitle {
+        font-size: 20px;
+        color: #333333;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .description {
+        font-size: 16px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        color: #555555;
+    }
+    </style>
+    <div class="main-container">
+        <h1 class="title">Welcome to FitSync</h1>
+        <h3 class="subtitle">Your Personal Health Analytics Dashboard</h3>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-# Displaying the DataFrame
-# st.dataframe(df)
-st.write("Explore your health metrics in depth with FitSync")
+# Provide a brief introductory text with enhanced styling
+description = """
+FitSync helps you seamlessly monitor and analyze your key health metrics.
+Navigate through our intuitive interface using the sidebar and gain insights
+into your daily activities and health scores.
+"""
+st.markdown(f'<p class="description">{description}</p>', unsafe_allow_html=True)
 
-# Calculate metrics from the filtered DataFrame
-average_steps = df['Steps'].mean()
-average_sleep_hours = df['Sleep_Hours'].mean()
-average_recovery_score = df['Recovery_Score'].mean()
-
-# Set up a 3-column layout for displaying metrics
-col1, col2, col3 = st.columns(3)
-# Display filtered metrics in respective columns
-with col1:
-    st.metric(label="Average Steps", value=f"{average_steps:.0f}", delta=None)
-
-with col2:
-    st.metric(label="Average Sleep Hours", value=f"{average_sleep_hours:.1f}", delta=None)
-
-with col3:
-    st.metric(label="Average Recovery Score", value=f"{average_recovery_score:.1f}", delta=None)
-
-# The DataFrame display can be updated here if needed
-# Example: st.dataframe(df)
-
-# Additional sections could be added here for more analytics and visualizations
+# Encourage navigation through the app
+st.markdown(
+    "<h3 style='text-align: center;'>*Use the sidebar to navigate between pages*</h3>",
+    unsafe_allow_html=True
+)
 
