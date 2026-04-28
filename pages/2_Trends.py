@@ -1,3 +1,8 @@
+import streamlit as st
+from modules.processor import process_data
+import plotly.express as px
+import pandas as pd
+
 # Configure the page layout and title
 st.set_page_config(layout="wide", page_title="Trends & Insights")
 
@@ -51,4 +56,3 @@ def plot_histograms(columns):
         st.plotly_chart(hist_fig, use_container_width=True)
 
 plot_histograms(metric_columns)
-
