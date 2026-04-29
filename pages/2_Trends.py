@@ -16,7 +16,12 @@ time_range = st.sidebar.selectbox(
 )
 
 # Load and process the data
-df = process_data()
+@st.cache_data
+def process_data_cached():
+    return process_data()
+
+# Use the cached data processing function
+df = process_data_cached()
 
 # Filter the DataFrame based on selected time range
 filtered_df = df
@@ -56,3 +61,4 @@ def plot_histograms(columns):
         st.plotly_chart(hist_fig, use_container_width=True)
 
 plot_histograms(metric_columns)
+

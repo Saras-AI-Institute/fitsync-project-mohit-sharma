@@ -19,7 +19,12 @@ time_range = st.sidebar.selectbox(
 )
 
 # Load and process the data
-df = process_data()
+@st.cache_data
+def process_data_cached():
+    return process_data()
+
+# Use the cached data processing function
+df = process_data_cached()
 
 # Filter the DataFrame based on selected time range
 filtered_df = df
@@ -84,3 +89,4 @@ with chart_col4:
 # Example: st.dataframe(df)
 
 st.write("Explore your health metrics in depth with FitSync")
+
