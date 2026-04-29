@@ -57,14 +57,14 @@ chart_col1, chart_col2 = st.columns(2)
 with chart_col1:
     st.subheader("Recovery Score & Sleep Trend")
     fig1 = px.line(filtered_df, x='Date', y=['Recovery_Score', 'Sleep_Hours'],
-                   labels={'value': 'Scores'}, title='Recovery Score & Sleep Trend')
+                   labels={'value': 'Scores'}, title="")
     st.plotly_chart(fig1, use_container_width=True)
 
 # Right Column: Scatter Plot
 with chart_col2:
     st.subheader("Recovery Score vs Daily Steps")
     fig2 = px.scatter(filtered_df, x='Steps', y='Recovery_Score', color='Sleep_Hours',
-                      labels={'color': 'Sleep Hours'}, title='Recovery Score vs Daily Steps')
+                      labels={'color': 'Sleep Hours'}, title="")
     st.plotly_chart(fig2, use_container_width=True)
 
 # Below the first set of charts, create another two-column layout
@@ -75,14 +75,14 @@ with chart_col3:
     st.subheader("Recovery Score vs Resting Heart Rate")
     fig3 = px.scatter(filtered_df, x='Heart_Rate_bpm', y='Recovery_Score',
                       labels={'x': 'Heart Rate', 'y': 'Recovery Score'},
-                      title='Recovery Score vs Resting Heart Rate')
+                      title="")
     st.plotly_chart(fig3, use_container_width=True)
 
 # Right Column: Line Chart - Calories Burned Trend
 with chart_col4:
     st.subheader("Daily Calories Burned Trend")
     fig4 = px.line(filtered_df, x='Date', y='Calories_Burned',
-                   labels={'y': 'Calories Burned'}, title='Daily Calories Burned Trend')
+                   labels={'y': 'Calories Burned'}, title="")
     st.plotly_chart(fig4, use_container_width=True)
 
 # The DataFrame display can be updated here if needed
